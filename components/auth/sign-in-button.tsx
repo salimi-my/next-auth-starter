@@ -8,7 +8,7 @@ interface SignInButtonProps {
   asChild?: boolean;
 }
 
-export default function SignInButton({
+export function SignInButton({
   children,
   mode = 'redirect',
   asChild
