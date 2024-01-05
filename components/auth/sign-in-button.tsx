@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 interface SignInButtonProps {
   children: React.ReactNode;
   mode?: 'modal' | 'redirect';
@@ -11,9 +13,15 @@ export default function SignInButton({
   mode = 'redirect',
   asChild
 }: SignInButtonProps) {
+  const router = useRouter();
+
   const onClick = () => {
-    console.log('Sign in button clicked.');
+    router.push('/auth/login');
   };
+
+  if (mode === 'modal') {
+    return <span>Modal to be created</span>;
+  }
 
   return (
     <span onClick={onClick} className='cursor-pointer'>
