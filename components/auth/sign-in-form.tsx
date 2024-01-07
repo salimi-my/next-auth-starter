@@ -3,6 +3,7 @@
 import * as z from 'zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { useState, useTransition } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
@@ -14,6 +15,7 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { SignInSchema } from '@/schemas';
+import { signIn } from '@/actions/sign-in';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { FormError } from '@/components/form-error';
@@ -21,6 +23,10 @@ import { FormSuccess } from '@/components/form-success';
 import { CardWrapper } from '@/components/auth/card-wrapper';
 
 export function SignInForm() {
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>('');
+  const [success, setSuccess] = useState<string | undefined>('');
+
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
     defaultValues: {
@@ -29,7 +35,17 @@ export function SignInForm() {
     }
   });
 
-  const onSubmit = (values: z.infer<typeof SignInSchema>) => {};
+  const onSubmit = (values: z.infer<typeof SignInSchema>) => {
+    setError('');
+    setSuccess('');
+
+    startTransition(() => {
+      signIn(values).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
+    });
+  };
 
   return (
     <CardWrapper
@@ -50,6 +66,7 @@ export function SignInForm() {
                   <FormControl>
                     <Input
                       {...field}
+                      disabled={isPending}
                       placeholder='name@domain.com'
                       type='email'
                     />
@@ -65,10 +82,16 @@ export function SignInForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder='••••••••' type='password' />
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder='••••••••'
+                      type='password'
+                    />
                   </FormControl>
                   <FormMessage />
                   <Button
+                    disabled={isPending}
                     size='sm'
                     variant='link'
                     asChild
@@ -80,9 +103,9 @@ export function SignInForm() {
               )}
             />
           </div>
-          <FormError message='' />
-          <FormSuccess message='' />
-          <Button type='submit' className='w-full'>
+          <FormError message={error} />
+          <FormSuccess message={success} />
+          <Button disabled={isPending} type='submit' className='w-full'>
             Sign in
           </Button>
         </form>
