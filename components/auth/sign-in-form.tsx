@@ -49,8 +49,7 @@ export function SignInForm() {
     startTransition(() => {
       signIn(values).then((data) => {
         setError(data?.error);
-
-        // setSuccess(data?.success);
+        setSuccess(data?.success);
       });
     });
   };
