@@ -6,6 +6,7 @@ import bcrypt from 'bcryptjs';
 import { db } from '@/lib/db';
 import { SignUpSchema } from '@/schemas';
 import { getUserByEmail } from '@/data/user';
+import { sendVerificationEmail } from '@/lib/mail';
 import { generateVerificationToken } from '@/lib/tokens';
 
 export async function signUp(values: z.infer<typeof SignUpSchema>) {
@@ -37,7 +38,7 @@ export async function signUp(values: z.infer<typeof SignUpSchema>) {
 
   const verificationToken = await generateVerificationToken(email);
 
-  // Send email here
+  await sendVerificationEmail(verificationToken.email, verificationToken.token);
 
   return { success: 'Confirmation email sent.' };
 }

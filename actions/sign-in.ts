@@ -7,6 +7,7 @@ import { SignInSchema } from '@/schemas';
 import { getUserByEmail } from '@/data/user';
 import { signIn as authSignIn } from '@/auth';
 import { DEFAULT_SIGNIN_REDIRECT } from '@/routes';
+import { sendVerificationEmail } from '@/lib/mail';
 import { generateVerificationToken } from '@/lib/tokens';
 
 export async function signIn(values: z.infer<typeof SignInSchema>) {
@@ -29,7 +30,10 @@ export async function signIn(values: z.infer<typeof SignInSchema>) {
       existingUser.email
     );
 
-    // Send email here
+    await sendVerificationEmail(
+      verificationToken.email,
+      verificationToken.token
+    );
 
     return { success: 'Confirmation email sent.' };
   }
