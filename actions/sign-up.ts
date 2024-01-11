@@ -3,9 +3,10 @@
 import * as z from 'zod';
 import bcrypt from 'bcryptjs';
 
-import { SignUpSchema } from '@/schemas';
 import { db } from '@/lib/db';
+import { SignUpSchema } from '@/schemas';
 import { getUserByEmail } from '@/data/user';
+import { generateVerificationToken } from '@/lib/tokens';
 
 export async function signUp(values: z.infer<typeof SignUpSchema>) {
   const validatedFields = SignUpSchema.safeParse(values);
@@ -34,5 +35,9 @@ export async function signUp(values: z.infer<typeof SignUpSchema>) {
     }
   });
 
-  return { success: 'User created.' };
+  const verificationToken = await generateVerificationToken(email);
+
+  // Send email here
+
+  return { success: 'Confirmation email sent.' };
 }
