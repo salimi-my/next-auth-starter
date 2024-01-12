@@ -1,8 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
 import { BeatLoader } from 'react-spinners';
 import { useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
