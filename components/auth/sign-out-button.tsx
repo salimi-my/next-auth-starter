@@ -8,7 +8,7 @@ interface SignOutButtonProps {
 
 export function SignOutButton({ children }: SignOutButtonProps) {
   return (
-    <span onClick={() => signOut} className='cursor-pointer'>
+    <span onClick={() => signOut()} className='cursor-pointer'>
       {children}
     </span>
   );
