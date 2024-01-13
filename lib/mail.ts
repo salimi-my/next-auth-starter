@@ -20,8 +20,17 @@ export async function sendPasswordResetEmail(email: string, token: string) {
 
   await resend.emails.send({
     from: 'Next Auth Starter <reset@auth.salimi.my>',
-    to: email,
+    to: [email],
     subject: 'Password Reset',
     html: `<p>Click <a href="${resetLink}">here</a> to reset password.</p>`
+  });
+}
+
+export async function sendTwoFactorTokenEmail(email: string, token: string) {
+  await resend.emails.send({
+    from: 'Next Auth Starter <2fa@auth.salimi.my>',
+    to: [email],
+    subject: 'Two Factor Authentication Code',
+    html: `<p>Your 2FA code: ${token}</p>`
   });
 }
