@@ -6,8 +6,8 @@ export default function ErrorCard() {
   return (
     <CardWrapper
       headerLabel='Oops! Something went wrong!'
+      backButtonLabel='Back to sign in'
       backButtonHref='/auth/sign-in'
-      backButtonLabel='Back to login'
     >
       <div className='w-full flex justify-center items-center'>
         <ExclamationTriangleIcon className='text-destructive w-16 h-auto' />

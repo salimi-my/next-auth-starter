@@ -48,8 +48,8 @@ export function ForgotPasswordForm() {
   return (
     <CardWrapper
       headerLabel='Forgot your password?'
-      backButtonLabel='Back to login'
-      backButtonHref='/auth/login'
+      backButtonLabel='Back to sign in'
+      backButtonHref='/auth/sign-in'
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
