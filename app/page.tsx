@@ -23,7 +23,7 @@ export default function HomePage() {
         </h1>
         <p className='text-white text-lg'>A simple authentication service</p>
         <div>
-          <SignInButton asChild>
+          <SignInButton mode='redirect' asChild>
             <Button variant='secondary' size='lg'>
               Sign in
             </Button>
