@@ -2,7 +2,7 @@ import { LucideIcon } from 'lucide-react';
 
 import { ExtendedUser } from '@/next-auth';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 interface UserInfoProps {
   user?: ExtendedUser;
@@ -18,7 +18,10 @@ export function UserInfo({ user, label, icon: Icon }: UserInfoProps) {
         {label}
       </h2>
       <Card className='w-[600px]'>
-        <CardContent className='space-y-4 p-6'>
+        <CardHeader>
+          <h3 className='font-semibold'>User Information</h3>
+        </CardHeader>
+        <CardContent className='space-y-4'>
           <div className='flex flex-row items-center justify-between rounded-md border px-3 py-1.5'>
             <p className='text-sm font-medium'>ID</p>
             <p className='truncate text-xs max-w-[200px] font-mono px-2 bg-zinc-100 rounded-sm'>
