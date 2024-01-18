@@ -3,38 +3,55 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { UserButton } from '@/components/auth/user-button';
 
 export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className='bg-secondary flex justify-between items-center p-4 rounded-xl w-[600px] shadow-sm'>
-      <div className='flex gap-x-2'>
-        <Button
-          asChild
-          variant={pathname === '/server' ? 'default' : 'outline'}
+    <nav className='w-full h-16 border-b flex items-center px-4'>
+      <div className='flex items-center space-x-6'>
+        <Link
+          href='/server'
+          className={cn(
+            'text-sm font-medium transition-colors hover:text-primary',
+            pathname !== '/server' && 'text-muted-foreground'
+          )}
         >
-          <Link href='/server'>Server</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === '/client' ? 'default' : 'outline'}
+          Server
+        </Link>
+        <Link
+          href='/client'
+          className={cn(
+            'text-sm font-medium transition-colors hover:text-primary',
+            pathname !== '/client' && 'text-muted-foreground'
+          )}
         >
-          <Link href='/client'>Client</Link>
-        </Button>
-        <Button asChild variant={pathname === '/admin' ? 'default' : 'outline'}>
-          <Link href='/admin'>Admin</Link>
-        </Button>
-        <Button
-          asChild
-          variant={pathname === '/settings' ? 'default' : 'outline'}
+          Client
+        </Link>
+        <Link
+          href='/admin'
+          className={cn(
+            'text-sm font-medium transition-colors hover:text-primary',
+            pathname !== '/admin' && 'text-muted-foreground'
+          )}
         >
-          <Link href='/settings'>Settings</Link>
-        </Button>
+          Admin
+        </Link>
+        <Link
+          href='/settings'
+          className={cn(
+            'text-sm font-medium transition-colors hover:text-primary',
+            pathname !== '/settings' && 'text-muted-foreground'
+          )}
+        >
+          Settings
+        </Link>
       </div>
-      <UserButton />
+      <div className='ml-auto flex items-center space-x-4'>
+        <UserButton />
+      </div>
     </nav>
   );
 }
