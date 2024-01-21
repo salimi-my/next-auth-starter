@@ -1,17 +1,18 @@
 'use server';
 
 import * as z from 'zod';
-import bcrypt from 'bcryptjs';
 
 import { db } from '@/lib/db';
 import { update } from '@/auth';
-import { SettingsSchema } from '@/schemas';
+import { UpdateProfileSchema } from '@/schemas';
 import { sendVerificationEmail } from '@/lib/mail';
 import { currentUser } from '@/lib/authentication';
 import { generateVerificationToken } from '@/lib/tokens';
 import { getUserByEmail, getUserById } from '@/data/user';
 
-export async function settings(values: z.infer<typeof SettingsSchema>) {
+export async function updateProfile(
+  values: z.infer<typeof UpdateProfileSchema>
+) {
   const user = await currentUser();
 
   if (!user) {
@@ -22,14 +23,6 @@ export async function settings(values: z.infer<typeof SettingsSchema>) {
 
   if (!dbUser) {
     return { error: 'Unauthorized.' };
-  }
-
-  if (user.isOAuth) {
-    values.email = undefined;
-    values.currentPassword = undefined;
-    values.password = undefined;
-    values.confirm = undefined;
-    values.isTwoFactorEnabled = undefined;
   }
 
   if (values.email && values.email !== user.email) {
@@ -48,36 +41,15 @@ export async function settings(values: z.infer<typeof SettingsSchema>) {
     return { success: 'Confirmation email sent.' };
   }
 
-  if (
-    values.currentPassword &&
-    values.password &&
-    values.confirm &&
-    dbUser.password
-  ) {
-    const passwordsMatch = await bcrypt.compare(
-      values.currentPassword,
-      dbUser.password
-    );
-
-    if (!passwordsMatch) {
-      return { error: 'Incorrect password.' };
-    }
-
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hashedPassword = await bcrypt.hash(values.password, salt);
-
-    values.password = hashedPassword;
-    values.currentPassword = undefined;
-    values.confirm = undefined;
-  }
-
   const updatedUser = await db.user.update({
     where: {
       id: dbUser.id
     },
     data: {
-      ...values
+      name: values.name,
+      email: user.isOAuth ? undefined : values.email,
+      role: values.role,
+      isTwoFactorEnabled: user.isOAuth ? undefined : values.isTwoFactorEnabled
     }
   });
 
@@ -90,5 +62,5 @@ export async function settings(values: z.infer<typeof SettingsSchema>) {
     }
   });
 
-  return { success: 'Settings updated.' };
+  return { success: 'Profile updated.' };
 }

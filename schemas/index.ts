@@ -51,55 +51,30 @@ export const ResetPasswordSchema = z
     path: ['confirm']
   });
 
-export const SettingsSchema = z
+export const UpdateProfileSchema = z.object({
+  name: z.string().min(1, {
+    message: 'Name is required.'
+  }),
+  email: z.string().email({
+    message: 'Email is required.'
+  }),
+  role: z.enum([UserRole.ADMIN, UserRole.USER]),
+  isTwoFactorEnabled: z.boolean()
+});
+
+export const UpdatePasswordSchema = z
   .object({
-    name: z.optional(z.string()),
-    isTwoFactorEnabled: z.optional(z.boolean()),
-    role: z.enum([UserRole.ADMIN, UserRole.USER]),
-    email: z.optional(z.string().email()),
-    currentPassword: z.optional(
-      z.string().min(8, {
-        message: 'Minimum of 8 characters required.'
-      })
-    ),
-    password: z.optional(
-      z.string().min(8, {
-        message: 'Minimum of 8 characters required.'
-      })
-    ),
-    confirm: z.optional(
-      z.string().min(8, {
-        message: 'Minimum 8 characters required.'
-      })
-    )
+    currentPassword: z.string().min(8, {
+      message: 'Minimum of 8 characters required.'
+    }),
+    newPassword: z.string().min(8, {
+      message: 'Minimum of 8 characters required.'
+    }),
+    confirmPassword: z.string().min(8, {
+      message: 'Minimum 8 characters required.'
+    })
   })
-  .refine(
-    (data) => {
-      if (data.currentPassword && !data.password) {
-        return false;
-      }
-
-      return true;
-    },
-    {
-      message: 'New password is required!',
-      path: ['password']
-    }
-  )
-  .refine(
-    (data) => {
-      if (data.password && !data.currentPassword) {
-        return false;
-      }
-
-      return true;
-    },
-    {
-      message: 'Current password is required!',
-      path: ['currentPassword']
-    }
-  )
-  .refine((data) => data.password === data.confirm, {
+  .refine((data) => data.newPassword === data.confirmPassword, {
     message: 'Passwords does not match.',
     path: ['confirm']
   });
