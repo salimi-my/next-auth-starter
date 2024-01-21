@@ -36,7 +36,7 @@ export default function AdminPage() {
   return (
     <div className='flex flex-col'>
       <h2 className='text-3xl font-bold tracking-tight pb-4 flex items-center'>
-        <Lock className='mr-2' />
+        <Lock className='mr-2 w-8 h-auto' />
         Admin
       </h2>
       <Card className='w-[600px]'>

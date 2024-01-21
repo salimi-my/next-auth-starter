@@ -14,7 +14,7 @@ export function UserInfo({ user, label, icon: Icon }: UserInfoProps) {
   return (
     <div className='flex flex-col'>
       <h2 className='text-3xl font-bold tracking-tight pb-4 flex items-center'>
-        <Icon className='mr-2' />
+        <Icon className='mr-2 w-8 h-auto' />
         {label}
       </h2>
       <Card className='w-[600px]'>
