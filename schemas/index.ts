@@ -3,7 +3,7 @@ import { UserRole } from '@prisma/client';
 
 export const SignInSchema = z.object({
   email: z.string().email({
-    message: 'Email is required.'
+    message: 'Valid email is required.'
   }),
   password: z.string().min(1, {
     message: 'Password is required.'
@@ -14,7 +14,7 @@ export const SignInSchema = z.object({
 export const SignUpSchema = z
   .object({
     email: z.string().email({
-      message: 'Email is required.'
+      message: 'Valid email is required.'
     }),
     password: z.string().min(8, {
       message: 'Minimum 8 characters required.'
@@ -33,7 +33,7 @@ export const SignUpSchema = z
 
 export const ForgotPasswordSchema = z.object({
   email: z.string().email({
-    message: 'Email is required.'
+    message: 'Valid email is required.'
   })
 });
 
@@ -56,7 +56,7 @@ export const UpdateProfileSchema = z.object({
     message: 'Name is required.'
   }),
   email: z.string().email({
-    message: 'Email is required.'
+    message: 'Valid email is required.'
   }),
   role: z.enum([UserRole.ADMIN, UserRole.USER]),
   isTwoFactorEnabled: z.boolean()
