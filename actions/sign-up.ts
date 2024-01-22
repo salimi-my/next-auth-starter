@@ -28,7 +28,7 @@ export async function signUp(values: z.infer<typeof SignUpSchema>) {
     return { error: 'Email already exist.' };
   }
 
-  await db.user.create({
+  const newUser = await db.user.create({
     data: {
       name,
       email,
@@ -36,9 +36,13 @@ export async function signUp(values: z.infer<typeof SignUpSchema>) {
     }
   });
 
-  const verificationToken = await generateVerificationToken(email);
+  if (!newUser || !newUser.email) {
+    return { error: 'Oops! Something went wrong.' };
+  }
 
-  await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  const verificationToken = await generateVerificationToken(newUser.id);
+
+  await sendVerificationEmail(newUser.email, verificationToken.token);
 
   return { success: 'Confirmation email sent.' };
 }

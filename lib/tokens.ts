@@ -2,17 +2,20 @@ import crypto from 'crypto';
 import { v4 as uuidv4 } from 'uuid';
 
 import { db } from '@/lib/db';
-import { getVerificationTokenByEmail } from '@/data/verification-token';
+import { getVerificationTokenByUserId } from '@/data/verification-token';
 import { getPasswordResetTokenByEmail } from '@/data/password-reset-token';
 import { getTwoFactorTokenByEmail } from '@/data/two-factor-token';
 
-export async function generateVerificationToken(email: string) {
+export async function generateVerificationToken(
+  userId: string,
+  isUpdateEmail: boolean = false
+) {
   const token = uuidv4();
 
   // Expire the token in one hour
   const expires = new Date(new Date().getTime() + 3600 * 1000);
 
-  const existingToken = await getVerificationTokenByEmail(email);
+  const existingToken = await getVerificationTokenByUserId(userId);
 
   if (existingToken) {
     await db.verificationToken.delete({
@@ -24,8 +27,9 @@ export async function generateVerificationToken(email: string) {
 
   const verficationToken = await db.verificationToken.create({
     data: {
-      email,
+      userId,
       token,
+      isUpdateEmail,
       expires
     }
   });

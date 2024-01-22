@@ -32,13 +32,23 @@ export async function updateProfile(
       return { error: 'Email already exist.' };
     }
 
-    const verificationToken = await generateVerificationToken(values.email);
-    await sendVerificationEmail(
-      verificationToken.email,
-      verificationToken.token
-    );
+    const verificationToken = await generateVerificationToken(dbUser.id, true);
 
-    return { success: 'Confirmation email sent.' };
+    await db.user.update({
+      where: {
+        id: dbUser.id
+      },
+      data: {
+        name: values.name,
+        tempEmail: user.isOAuth ? undefined : values.email,
+        role: values.role,
+        isTwoFactorEnabled: user.isOAuth ? undefined : values.isTwoFactorEnabled
+      }
+    });
+
+    await sendVerificationEmail(values.email, verificationToken.token);
+
+    return { success: 'Profile updated & verification email sent.' };
   }
 
   const updatedUser = await db.user.update({
@@ -47,7 +57,6 @@ export async function updateProfile(
     },
     data: {
       name: values.name,
-      email: user.isOAuth ? undefined : values.email,
       role: values.role,
       isTwoFactorEnabled: user.isOAuth ? undefined : values.isTwoFactorEnabled
     }

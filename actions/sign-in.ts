@@ -35,14 +35,9 @@ export async function signIn(
   }
 
   if (!existingUser.emailVerified) {
-    const verificationToken = await generateVerificationToken(
-      existingUser.email
-    );
+    const verificationToken = await generateVerificationToken(existingUser.id);
 
-    await sendVerificationEmail(
-      verificationToken.email,
-      verificationToken.token
-    );
+    await sendVerificationEmail(existingUser.email, verificationToken.token);
 
     return { success: 'Confirmation email sent.' };
   }

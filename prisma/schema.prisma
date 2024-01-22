@@ -17,6 +17,7 @@ model User {
   id                      String                  @id @default(cuid())
   name                    String?
   email                   String?                 @unique
+  tempEmail               String?
   emailVerified           DateTime?
   image                   String?
   password                String?
@@ -46,12 +47,13 @@ model Account {
 }
 
 model VerificationToken {
-  id        String    @id @default(cuid())
-  email     String
-  token     String    @unique
-  expires   DateTime
+  id              String    @id @default(cuid())
+  userId          String
+  token           String    @unique
+  isUpdateEmail   Boolean   @default(false)
+  expires         DateTime
 
-  @@unique([email, token])
+  @@unique([userId, token])
 }
 
 model PasswordResetToken {
