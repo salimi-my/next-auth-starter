@@ -44,7 +44,7 @@ export default function UpdateProfileForm() {
     resolver: zodResolver(UpdateProfileSchema),
     defaultValues: {
       name: user?.name || '',
-      email: user?.email || '',
+      email: user?.tempEmail ? user.tempEmail : user?.email ? user.email : '',
       role: user?.role || 'USER',
       isTwoFactorEnabled: user?.isTwoFactorEnabled || false
     }
@@ -100,9 +100,14 @@ export default function UpdateProfileForm() {
                     <Input
                       {...field}
                       placeholder='name@domain.com'
-                      disabled={isPending}
+                      disabled={isPending || !!user.tempEmail}
                     />
                   </FormControl>
+                  {!!user.tempEmail && (
+                    <FormDescription>
+                      Please verify your new email address
+                    </FormDescription>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
