@@ -25,7 +25,13 @@ export async function updateProfile(
     return { error: 'Unauthorized.' };
   }
 
+  let updateEmail = false;
+
   if (values.email && values.email !== user.email) {
+    updateEmail = true;
+  }
+
+  if (updateEmail) {
     const existingUser = await getUserByEmail(values.email);
 
     if (existingUser && existingUser.id !== user.id) {
@@ -34,21 +40,7 @@ export async function updateProfile(
 
     const verificationToken = await generateVerificationToken(dbUser.id, true);
 
-    await db.user.update({
-      where: {
-        id: dbUser.id
-      },
-      data: {
-        name: values.name,
-        tempEmail: user.isOAuth ? undefined : values.email,
-        role: values.role,
-        isTwoFactorEnabled: user.isOAuth ? undefined : values.isTwoFactorEnabled
-      }
-    });
-
     await sendVerificationEmail(values.email, verificationToken.token);
-
-    return { success: 'Profile updated & verification email sent.' };
   }
 
   const updatedUser = await db.user.update({
@@ -57,6 +49,7 @@ export async function updateProfile(
     },
     data: {
       name: values.name,
+      tempEmail: user.isOAuth ? undefined : values.email,
       role: values.role,
       isTwoFactorEnabled: user.isOAuth ? undefined : values.isTwoFactorEnabled
     }
@@ -65,11 +58,14 @@ export async function updateProfile(
   update({
     user: {
       name: updatedUser.name,
-      email: updatedUser.email,
       isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
       role: updatedUser.role
     }
   });
 
-  return { success: 'Profile updated.' };
+  return {
+    success: !updateEmail
+      ? 'Profile updated.'
+      : 'Profile updated & verification email sent.'
+  };
 }
