@@ -29,8 +29,9 @@ import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
-import { useCurrentUser } from '@/hooks/use-current-user';
 import { updateProfile } from '@/actions/update-profile';
+import { useCurrentUser } from '@/hooks/use-current-user';
+import { cancelNewEmail } from '@/actions/cancel-new-email';
 
 export default function UpdateProfileForm() {
   const user = useCurrentUser();
@@ -67,6 +68,25 @@ export default function UpdateProfileForm() {
     });
   };
 
+  const onCancelEmailUpdate = () => {
+    startTransition(() => {
+      cancelNewEmail()
+        .then((data) => {
+          if (data.error) {
+            setError(data.error);
+          }
+
+          if (data.success) {
+            update();
+            setSuccess(data.success);
+          }
+
+          form.reset();
+        })
+        .catch(() => setError('Oops! Something went wrong.'));
+    });
+  };
+
   return (
     <Form {...form}>
       <form className='space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
@@ -96,16 +116,28 @@ export default function UpdateProfileForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder='name@domain.com'
-                      disabled={isPending || !!user.tempEmail}
-                    />
-                  </FormControl>
+                  <div className='flex gap-2'>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder='name@domain.com'
+                        disabled={isPending || !!user.tempEmail}
+                      />
+                    </FormControl>
+                    {!!user.tempEmail && (
+                      <Button
+                        type='button'
+                        onClick={onCancelEmailUpdate}
+                        disabled={isPending}
+                      >
+                        Cancel
+                      </Button>
+                    )}
+                  </div>
                   {!!user.tempEmail && (
                     <FormDescription>
-                      Please verify your new email address
+                      Please verify your new email address or cancel to use old
+                      email address
                     </FormDescription>
                   )}
                   <FormMessage />
