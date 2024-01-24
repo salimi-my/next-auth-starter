@@ -51,8 +51,9 @@ export function SignUpForm() {
   return (
     <CardWrapper
       headerLabel='Create an account'
-      backButtonLabel='Already have an account?'
-      backButtonHref='/auth/sign-in'
+      footerLabel='Sign up'
+      footerHref='/auth/sign-in'
+      footerDesc='Already have an account?'
       showSocial
     >
       <Form {...form}>
@@ -70,6 +71,7 @@ export function SignUpForm() {
                       disabled={isPending}
                       placeholder='John Doe'
                       type='text'
+                      autoComplete='name'
                     />
                   </FormControl>
                   <FormMessage />
@@ -88,6 +90,7 @@ export function SignUpForm() {
                       disabled={isPending}
                       placeholder='name@domain.com'
                       type='email'
+                      autoComplete='email'
                     />
                   </FormControl>
                   <FormMessage />
