@@ -75,7 +75,7 @@ export function SignInForm() {
       footerLabel='Sign up'
       footerHref='/auth/sign-up'
       footerDesc="Dont't have an account yet?"
-      showSocial
+      showSocial={!showTwoFactor}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
