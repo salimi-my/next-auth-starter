@@ -17,7 +17,7 @@ export function UserInfo({ user, label, icon: Icon }: UserInfoProps) {
         <Icon className='mr-2 w-8 h-auto' />
         {label}
       </h2>
-      <Card className='w-[600px]'>
+      <Card className='w-full'>
         <CardHeader>
           <h3 className='font-semibold'>User Information</h3>
         </CardHeader>
