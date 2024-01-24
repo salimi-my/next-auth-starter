@@ -13,7 +13,7 @@ export default function SettingsPage() {
         <UserCog className='mr-2 w-8 h-auto' />
         Settings
       </h2>
-      <Card className='w-[600px]'>
+      <Card className='w-full'>
         <CardHeader>
           <h3 className='font-semibold'>Update Profile</h3>
         </CardHeader>
@@ -21,7 +21,7 @@ export default function SettingsPage() {
           <UpdateProfileForm />
         </CardContent>
       </Card>
-      <Card className='w-[600px] mt-6'>
+      <Card className='w-full mt-6'>
         <CardHeader>
           <h3 className='font-semibold'>Update Password</h3>
         </CardHeader>
