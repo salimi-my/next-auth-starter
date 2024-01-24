@@ -9,8 +9,8 @@ import UpdatePasswordForm from '@/components/auth/update-password-form';
 export default function SettingsPage() {
   return (
     <>
-      <h2 className='text-3xl font-bold tracking-tight pb-4 flex items-center'>
-        <UserCog className='mr-2 w-8 h-auto' />
+      <h2 className='text-xl md:text-3xl font-bold tracking-tight pb-4 flex items-center'>
+        <UserCog className='mr-2 w-6 md:w-8 h-auto' />
         Settings
       </h2>
       <Card className='w-full'>

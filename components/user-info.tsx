@@ -13,8 +13,8 @@ interface UserInfoProps {
 export function UserInfo({ user, label, icon: Icon }: UserInfoProps) {
   return (
     <div className='flex flex-col'>
-      <h2 className='text-3xl font-bold tracking-tight pb-4 flex items-center'>
-        <Icon className='mr-2 w-8 h-auto' />
+      <h2 className='text-xl md:text-3xl font-bold tracking-tight pb-4 flex items-center'>
+        <Icon className='mr-2 w-6 md:w-8 h-auto' />
         {label}
       </h2>
       <Card className='w-full'>
