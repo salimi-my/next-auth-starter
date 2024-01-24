@@ -43,8 +43,9 @@ export function EmailVerificationForm() {
   return (
     <CardWrapper
       headerLabel='Verifying your email'
-      backButtonLabel='Back to sign in'
-      backButtonHref='/auth/sign-in'
+      footerLabel='Sign in'
+      footerHref='/auth/sign-in'
+      footerDesc='Go back.'
     >
       <div className='flex items-center w-full justify-center'>
         {!success && !error && <BeatLoader />}

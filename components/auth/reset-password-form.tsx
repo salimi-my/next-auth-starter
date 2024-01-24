@@ -52,8 +52,9 @@ export function ResetPasswordForm() {
   return (
     <CardWrapper
       headerLabel='Enter a new password'
-      backButtonLabel='Back to sign in'
-      backButtonHref='/auth/sign-in'
+      footerLabel='Sign in'
+      footerHref='/auth/sign-in'
+      footerDesc='Go back.'
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
