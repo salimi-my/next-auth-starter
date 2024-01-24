@@ -71,9 +71,10 @@ export function SignInForm() {
 
   return (
     <CardWrapper
-      headerLabel='Welcome back'
-      backButtonLabel="Dont't have an account?"
-      backButtonHref='/auth/sign-up'
+      headerLabel='Sign in to your account'
+      footerLabel='Sign up'
+      footerHref='/auth/sign-up'
+      footerDesc="Dont't have an account yet?"
       showSocial
     >
       <Form {...form}>
@@ -115,6 +116,7 @@ export function SignInForm() {
                           disabled={isPending}
                           placeholder='name@domain.com'
                           type='email'
+                          autoComplete='email'
                         />
                       </FormControl>
                       <FormMessage />
