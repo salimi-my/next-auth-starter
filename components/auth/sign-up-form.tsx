@@ -51,7 +51,7 @@ export function SignUpForm() {
   return (
     <CardWrapper
       headerLabel='Create an account'
-      footerLabel='Sign up'
+      footerLabel='Sign in'
       footerHref='/auth/sign-in'
       footerDesc='Already have an account?'
       showSocial
