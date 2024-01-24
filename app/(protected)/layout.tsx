@@ -10,7 +10,7 @@ export default function ProtectedLayout({
       <div className='w-full max-w-[600px] overflow-hidden rounded-[0.5rem] border bg-background shadow-md md:shadow-xl'>
         <div className='flex flex-col'>
           <Navbar />
-          <div className='p-8'>{children}</div>
+          <div className='p-4 md:p-8'>{children}</div>
         </div>
       </div>
     </div>
