@@ -39,7 +39,7 @@ export default function AdminPage() {
         <Lock className='mr-2 w-8 h-auto' />
         Admin
       </h2>
-      <Card className='w-[600px]'>
+      <Card className='w-full'>
         <CardHeader>
           <h3 className='font-semibold'>Admin-only Information</h3>
         </CardHeader>
@@ -47,12 +47,12 @@ export default function AdminPage() {
           <RoleGate allowedRole={UserRole.ADMIN}>
             <FormSuccess message='You are allowed to see this content.' />
           </RoleGate>
-          <div className='flex flex-row items-center justify-between rounded-lg border p-2'>
+          <div className='flex flex-col space-y-2 md:space-y-0 md:flex-row items-center justify-between rounded-lg border p-2'>
             <p className='text-sm font-medium'>Admin-only API Route</p>
             <Button onClick={onApiRouteClick}>Click to test</Button>
           </div>
 
-          <div className='flex flex-row items-center justify-between rounded-lg border p-2'>
+          <div className='flex flex-col space-y-2 md:space-y-0 md:flex-row items-center justify-between rounded-lg border p-2'>
             <p className='text-sm font-medium'>Admin-only Server Action</p>
             <Button onClick={onServerActionClick}>Click to test</Button>
           </div>
