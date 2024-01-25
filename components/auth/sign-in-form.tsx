@@ -2,6 +2,7 @@
 
 import * as z from 'zod';
 import Link from 'next/link';
+import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useState, useTransition } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -158,7 +159,13 @@ export function SignInForm() {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type='submit' className='w-full'>
-            {showTwoFactor ? 'Confirm' : 'Sign in'}
+            {isPending && (
+              <>
+                <Loader2 className='animate-spin mr-2' size={18} />
+                {showTwoFactor ? 'Confirming...' : 'Signing in...'}
+              </>
+            )}
+            {!isPending && <>{showTwoFactor ? 'Confirm' : 'Sign in'}</>}
           </Button>
         </form>
       </Form>

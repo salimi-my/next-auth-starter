@@ -1,6 +1,7 @@
 'use client';
 
 import * as z from 'zod';
+import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useState, useTransition } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -137,7 +138,13 @@ export function SignUpForm() {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type='submit' className='w-full'>
-            Create an account
+            {isPending && (
+              <>
+                <Loader2 className='animate-spin mr-2' size={18} />
+                Creating...
+              </>
+            )}
+            {!isPending && <>Create an account</>}
           </Button>
         </form>
       </Form>
