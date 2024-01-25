@@ -25,7 +25,7 @@ export function Social() {
 
   return (
     <div className='w-full flex flex-col'>
-      <div className='mt-1 mb-6 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-200 after:mt-0.5 after:flex-1 after:border-t after:border-gray-200'>
+      <div className='mt-1 mb-6 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-200 dark:before:border-gray-400 after:mt-0.5 after:flex-1 after:border-t after:border-gray-200 dark:after:border-gray-400'>
         <p className='mx-4 mb-0 text-center font-medium text-muted-foreground'>
           or
         </p>
