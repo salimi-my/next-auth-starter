@@ -9,7 +9,7 @@ import { SignInButton } from '@/components/auth/sign-in-button';
 export default function HomePage() {
   return (
     <>
-      <main className='flex h-full min-h-[calc(100vh_-_36px)] flex-col items-center justify-center'>
+      <main className='flex h-full min-h-[calc(100vh_-_36px_-_48px)] flex-col items-center justify-center'>
         <section className='space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32'>
           <div className='container flex max-w-[64rem] flex-col items-center gap-4 text-center'>
             <Link href='/' className='flex items-center mb-5'>
