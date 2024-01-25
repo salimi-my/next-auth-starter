@@ -24,25 +24,25 @@ export function UserInfo({ user, label, icon: Icon }: UserInfoProps) {
         <CardContent className='space-y-4'>
           <div className='flex flex-row items-center justify-between rounded-md border px-3 py-1.5'>
             <p className='text-sm font-medium'>ID</p>
-            <p className='truncate text-xs max-w-[200px] font-mono px-2 bg-zinc-100 rounded-sm'>
+            <p className='truncate text-xs max-w-[200px] font-mono px-2 bg-zinc-100 dark:bg-zinc-700 rounded-sm'>
               {user?.id}
             </p>
           </div>
           <div className='flex flex-row items-center justify-between rounded-md border px-3 py-1.5'>
             <p className='text-sm font-medium'>Name</p>
-            <p className='truncate text-xs max-w-[200px] font-mono px-2 bg-zinc-100 rounded-sm'>
+            <p className='truncate text-xs max-w-[200px] font-mono px-2 bg-zinc-100 dark:bg-zinc-700 rounded-sm'>
               {user?.name}
             </p>
           </div>
           <div className='flex flex-row items-center justify-between rounded-md border px-3 py-1.5'>
             <p className='text-sm font-medium'>Email</p>
-            <p className='truncate text-xs max-w-[200px] font-mono px-2 bg-zinc-100 rounded-sm'>
+            <p className='truncate text-xs max-w-[200px] font-mono px-2 bg-zinc-100 dark:bg-zinc-700 rounded-sm'>
               {user?.email}
             </p>
           </div>
           <div className='flex flex-row items-center justify-between rounded-md border px-3 py-1.5'>
             <p className='text-sm font-medium'>Role</p>
-            <p className='truncate text-xs max-w-[200px] font-mono px-2 bg-zinc-100 rounded-sm'>
+            <p className='truncate text-xs max-w-[200px] font-mono px-2 bg-zinc-100 dark:bg-zinc-700 rounded-sm'>
               {user?.role}
             </p>
           </div>
