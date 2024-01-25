@@ -1,6 +1,7 @@
 'use client';
 
 import * as z from 'zod';
+import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/react';
 import { useState, useTransition } from 'react';
@@ -123,7 +124,13 @@ export default function UpdatePasswordForm() {
         <FormError message={error} />
         <FormSuccess message={success} />
         <Button disabled={isPending} type='submit' className='w-full'>
-          Save
+          {isPending && (
+            <>
+              <Loader2 className='animate-spin mr-2' size={18} />
+              Saving...
+            </>
+          )}
+          {!isPending && <>Save</>}
         </Button>
       </form>
     </Form>

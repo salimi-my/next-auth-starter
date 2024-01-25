@@ -1,6 +1,7 @@
 'use client';
 
 import * as z from 'zod';
+import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useState, useTransition } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -77,7 +78,13 @@ export function ForgotPasswordForm() {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type='submit' className='w-full'>
-            Email password reset link
+            {isPending && (
+              <>
+                <Loader2 className='animate-spin mr-2' size={18} />
+                Sending email...
+              </>
+            )}
+            {!isPending && <>Email password reset link</>}
           </Button>
         </form>
       </Form>
