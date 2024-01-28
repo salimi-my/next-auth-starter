@@ -20,7 +20,7 @@ interface PasswordResetProps {
   resetLink: string;
 }
 
-export default function PasswordReset({ name, resetLink }: PasswordResetProps) {
+export function PasswordReset({ name, resetLink }: PasswordResetProps) {
   return (
     <Html>
       <Head>
@@ -32,7 +32,7 @@ export default function PasswordReset({ name, resetLink }: PasswordResetProps) {
           <Container className='max-w-[480px] my-0 mx-auto pt-5 pb-12 px-0'>
             <Link href={baseUrl} className='flex items-center text-gray-800'>
               <Img
-                src={`${baseUrl}/static/shield-check.png`}
+                src={`${baseUrl}/shield-check.png`}
                 width='32'
                 height='32'
                 className='mr-1 -ml-1'
