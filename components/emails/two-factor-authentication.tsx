@@ -1,18 +1,16 @@
 import {
   Body,
-  Button,
   Container,
   Head,
+  Heading,
   Html,
   Img,
   Link,
   Preview,
   Section,
-  Text,
   Tailwind,
-  Heading
+  Text
 } from '@react-email/components';
-import * as React from 'react';
 
 const baseUrl = process.env.APP_URL;
 
