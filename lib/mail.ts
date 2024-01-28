@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 
 import { EmailVerification } from '@/components/emails/email-verification';
+import PasswordReset from '@/components/emails/password-reset';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -21,14 +22,18 @@ export async function sendVerificationEmail(
   });
 }
 
-export async function sendPasswordResetEmail(email: string, token: string) {
+export async function sendPasswordResetEmail(
+  name: string | null,
+  email: string,
+  token: string
+) {
   const resetLink = `${domain}/auth/reset-password?token=${token}`;
 
   await resend.emails.send({
     from: 'Next Auth Starter <reset@auth.salimi.my>',
     to: [email],
     subject: 'Password Reset',
-    html: `<p>Click <a href="${resetLink}">here</a> to reset password.</p>`
+    react: PasswordReset({ name, resetLink })
   });
 }
 
