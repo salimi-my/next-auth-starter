@@ -39,6 +39,7 @@ export function EmailVerification({
                 width='32'
                 height='32'
                 alt='Auth'
+                className='mr-1'
               />
               <Heading as='h1' className='text-3xl font-bold m-0'>
                 Auth
