@@ -1,7 +1,8 @@
 import { Resend } from 'resend';
 
+import { PasswordReset } from '@/components/emails/password-reset';
 import { EmailVerification } from '@/components/emails/email-verification';
-import PasswordReset from '@/components/emails/password-reset';
+import { TwoFactorAuthentication } from '@/components/emails/two-factor-authentication';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -37,11 +38,15 @@ export async function sendPasswordResetEmail(
   });
 }
 
-export async function sendTwoFactorTokenEmail(email: string, token: string) {
+export async function sendTwoFactorTokenEmail(
+  name: string | null,
+  email: string,
+  token: string
+) {
   await resend.emails.send({
     from: 'Next Auth Starter <2fa@auth.salimi.my>',
     to: [email],
     subject: 'Two Factor Authentication Code',
-    html: `<p>Your 2FA code: ${token}</p>`
+    react: TwoFactorAuthentication({ name, token })
   });
 }

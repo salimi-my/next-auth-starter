@@ -97,7 +97,11 @@ export async function signIn(
     else {
       // Send 2FA code mail
       const twoFactorToken = await generateTwoFactorToken(existingUser.email);
-      await sendTwoFactorTokenEmail(twoFactorToken.email, twoFactorToken.token);
+      await sendTwoFactorTokenEmail(
+        existingUser.name,
+        twoFactorToken.email,
+        twoFactorToken.token
+      );
 
       return { twoFactor: true };
     }
