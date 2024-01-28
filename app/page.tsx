@@ -25,8 +25,8 @@ export default function HomePage() {
               An example authentication app built using Auth.js
             </h1>
             <p className='max-w-[42rem] leading-normal text-muted-foreground sm:text-lg sm:leading-8'>
-              This a complete authentication example app built using Next.js 14
-              and Auth.js with server actions included.
+              This is a complete authentication example app built using Next.js
+              14 and Auth.js, including server actions.
             </p>
             <div className='space-x-4 mt-5'>
               <SignInButton mode='redirect' asChild>
