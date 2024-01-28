@@ -42,7 +42,11 @@ export async function signUp(values: z.infer<typeof SignUpSchema>) {
 
   const verificationToken = await generateVerificationToken(newUser.id);
 
-  await sendVerificationEmail(newUser.email, verificationToken.token);
+  await sendVerificationEmail(
+    newUser.name,
+    newUser.email,
+    verificationToken.token
+  );
 
   return { success: 'Confirmation email sent.' };
 }

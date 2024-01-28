@@ -37,7 +37,11 @@ export async function signIn(
   if (!existingUser.emailVerified) {
     const verificationToken = await generateVerificationToken(existingUser.id);
 
-    await sendVerificationEmail(existingUser.email, verificationToken.token);
+    await sendVerificationEmail(
+      existingUser.name,
+      existingUser.email,
+      verificationToken.token
+    );
 
     return { success: 'Confirmation email sent.' };
   }

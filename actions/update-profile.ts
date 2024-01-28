@@ -40,7 +40,11 @@ export async function updateProfile(
 
     const verificationToken = await generateVerificationToken(dbUser.id, true);
 
-    await sendVerificationEmail(values.email, verificationToken.token);
+    await sendVerificationEmail(
+      values.name,
+      values.email,
+      verificationToken.token
+    );
   }
 
   const updatedUser = await db.user.update({
