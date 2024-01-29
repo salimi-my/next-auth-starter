@@ -1,12 +1,13 @@
-'use client';
-
 import { UserCog } from 'lucide-react';
 
+import { currentUser } from '@/lib/authentication';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import UpdateProfileForm from '@/components/auth/update-profile-form';
 import UpdatePasswordForm from '@/components/auth/update-password-form';
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const user = await currentUser();
+
   return (
     <>
       <h2 className='text-xl md:text-3xl font-bold tracking-tight pb-4 flex items-center'>
@@ -21,14 +22,16 @@ export default function SettingsPage() {
           <UpdateProfileForm />
         </CardContent>
       </Card>
-      <Card className='w-full mt-6'>
-        <CardHeader>
-          <h3 className='font-semibold'>Update Password</h3>
-        </CardHeader>
-        <CardContent>
-          <UpdatePasswordForm />
-        </CardContent>
-      </Card>
+      {user?.isOAuth === false && (
+        <Card className='w-full mt-6'>
+          <CardHeader>
+            <h3 className='font-semibold'>Update Password</h3>
+          </CardHeader>
+          <CardContent>
+            <UpdatePasswordForm />
+          </CardContent>
+        </Card>
+      )}
     </>
   );
 }
