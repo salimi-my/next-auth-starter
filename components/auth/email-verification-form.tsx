@@ -2,7 +2,7 @@
 
 import { BeatLoader } from 'react-spinners';
 import { useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FormError } from '@/components/form-error';
 import { FormSuccess } from '@/components/form-success';
@@ -10,6 +10,7 @@ import { CardWrapper } from '@/components/auth/card-wrapper';
 import { emailVerification } from '@/actions/email-verification';
 
 export function EmailVerificationForm() {
+  const submit = useRef(false);
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
 
@@ -37,7 +38,10 @@ export function EmailVerificationForm() {
   }, [token, success, error]);
 
   useEffect(() => {
-    onSubmit();
+    if (!submit.current) {
+      submit.current = true;
+      onSubmit();
+    }
   }, [onSubmit]);
 
   return (
