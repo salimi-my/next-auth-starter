@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [Auth](https://auth.salimi.my) &middot; [![Author Salimi](https://img.shields.io/badge/Author-Salimi-%3C%3E)](https://www.linkedin.com/in/mohamad-salimi/)
 
-## Getting Started
+This is a complete authentication example app built with Next.js 14 and Auth.js using the latest server actions. Sign in & sign up can use credentials or oauth providers with Google or GitHub. Authentication includes password reset, email verification, two factor authentication & role gate.
 
-First, run the development server:
+## Next.js authentication starter
+
+- Light / dark / system mode
+- PostgreSQL, Neon & Prisma for database
+- NextAuth.js v5 or Auth.js for authentication
+- React Email for email templating
+- Resend for sending email
+- Using Next.js 14 Server Action
+
+## Tech/framework used
+
+- Next.js 14
+- Shadcn/ui
+- NextAuth.js v5 / Auth.js
+- Tailwind CSS
+- TypeScript
+- PostgreSQL
+- Neon
+- Prisma
+- React Email
+- Resend
+
+## Starting the project
+
+Open the [.env.example](/.env.example) and fill in your Prisma, Auth & Resend Configurations then save it as .env the run the following command:
 
 ```bash
+npm install
+npx prisma generate
+npx prisma db push
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Demo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Hosted privately on personal DigitalOcean Droplet. [Click here](https://auth.salimi.my) to visit.
+<br>
+Direct link: `https://auth.salimi.my`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Screenshots
 
-## Learn More
+#### Homepage
 
-To learn more about Next.js, take a look at the following resources:
+![Homepage](/screenshots/screenshot-1.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Sign in
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+![Sign in](/screenshots/screenshot-2.png)
 
-## Deploy on Vercel
+#### Sign up
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Sign up](/screenshots/screenshot-3.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Settings
+
+![Settings](/screenshots/screenshot-4.png)
