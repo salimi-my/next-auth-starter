@@ -13,7 +13,7 @@ import {
   Text
 } from '@react-email/components';
 
-const baseUrl = process.env.APP_URL;
+const baseUrl = process.env.AUTH_URL;
 
 interface EmailVerificationProps {
   name: string | null;

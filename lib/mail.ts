@@ -6,7 +6,7 @@ import { TwoFactorAuthentication } from '@/components/emails/two-factor-authenti
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const domain = process.env.APP_URL;
+const domain = process.env.AUTH_URL;
 
 export async function sendVerificationEmail(
   name: string | null,
