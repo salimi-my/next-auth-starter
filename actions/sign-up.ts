@@ -48,5 +48,7 @@ export async function signUp(values: z.infer<typeof SignUpSchema>) {
     verificationToken.token
   );
 
-  return { success: 'Confirmation email sent.' };
+  return {
+    success: 'Sign up successful. Check your email to verify.'
+  };
 }
