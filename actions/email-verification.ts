@@ -40,5 +40,5 @@ export async function emailVerification(token: string) {
     }
   });
 
-  return { success: 'Email verified.' };
+  return { success: 'Email successfully verified. You can now sign in.' };
 }
